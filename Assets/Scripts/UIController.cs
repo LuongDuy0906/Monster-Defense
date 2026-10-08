@@ -5,17 +5,20 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text livesText;
+    [SerializeField] private TMP_Text resourcesText;
 
     void OnEnable()
     {
         SpawnManager.OnWaveChanged += UpdateWaveText;
         GameManager.OnLivesChanged += UpdateLivesText;
+        GameManager.OnResourcesChanged += UpdateResourcesText;
     }
 
     void OnDisable()
     {
         SpawnManager.OnWaveChanged -= UpdateWaveText;
         GameManager.OnLivesChanged -= UpdateLivesText;
+        GameManager.OnResourcesChanged -= UpdateResourcesText;
     }
 
     private void UpdateWaveText(int currentWave)
@@ -26,5 +29,10 @@ public class UIController : MonoBehaviour
     private void UpdateLivesText(int currentLives)
     {
         livesText.text = $"Lives: {currentLives}";
+    }
+
+    private void UpdateResourcesText(int currentResources)
+    {
+        resourcesText.text = $"Resources: {currentResources}";
     }
 }
