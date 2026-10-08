@@ -7,6 +7,8 @@ public class Tower : MonoBehaviour
 
     private CircleCollider2D _circleCollider;
     private List<Enemy> _enemiesInRange;
+    private ObjectPooler _projectilePool;
+    private float _shootTimer;
 
     void Start()
     {
@@ -14,6 +16,20 @@ public class Tower : MonoBehaviour
         _circleCollider.radius = data.range;
 
         _enemiesInRange = new List<Enemy>();
+
+        _projectilePool = GetComponent<ObjectPooler>();
+
+        _shootTimer = data.shootInterval;
+    }
+
+    void Update()
+    {
+        _shootTimer -= Time.deltaTime;
+        if(_shootTimer <= 0)
+        {
+            _shootTimer = data.shootInterval;
+            Shoot();
+        }
     }
 
     void OnDrawGizmos()
@@ -39,6 +55,21 @@ public class Tower : MonoBehaviour
             {
                 _enemiesInRange.Remove(enemy);
             }
+        }
+    }
+
+    private void Shoot()
+    {
+        if(_enemiesInRange.Count > 0)
+        {
+            GameObject projectile = _projectilePool.GetPooledObject();
+            projectile.transform.position = transform.position;
+            projectile.SetActive(true);
+
+            Vector2 shootDirection = (_enemiesInRange[0].transform.position - transform.position).normalized;
+
+            projectile.GetComponent<Projectile>().Shoot(data, shootDirection);
+
         }
     }
 }
