@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        OnWaveChanged.Invoke(_waveCounter);
+        OnWaveChanged?.Invoke(_waveCounter);
     }
 
     void Update()
