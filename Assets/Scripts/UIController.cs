@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
@@ -22,10 +24,12 @@ public class UIController : MonoBehaviour
     [SerializeField] private Color selectedButtonColor = Color.blue;
     [SerializeField] private Color normalTextColor = Color.black;
     [SerializeField] private Color selectedTextColor = Color.white;
+    [SerializeField] private GameObject pausePanel;
 
 
     private List<GameObject> activeCards = new List<GameObject>();
     private Platform _currentPlatform;
+    private bool _isGamePaused = false;
 
     void OnEnable()
     {
@@ -50,6 +54,14 @@ public class UIController : MonoBehaviour
         speed1Button.onClick.AddListener(() => SetGameSpeed(0.2f));
         speed2Button.onClick.AddListener(() => SetGameSpeed(1f));
         speed3Button.onClick.AddListener(() => SetGameSpeed(2f));
+    }
+
+    void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            TogglePause();
+        }
     }
 
     private void UpdateWaveText(int currentWave)
@@ -129,6 +141,7 @@ public class UIController : MonoBehaviour
 
     private void SetGameSpeed(float timeScale)
     {
+        if(pausePanel.activeSelf) return;
         HighlightSelectedSpeedButton(timeScale);
         GameManager.Instance.SetGameSpeed(timeScale);
     }
@@ -150,5 +163,39 @@ public class UIController : MonoBehaviour
         UpdateButtonVisual(speed1Button, selectedSpeed == 0.2f);
         UpdateButtonVisual(speed2Button, selectedSpeed == 1f);
         UpdateButtonVisual(speed3Button, selectedSpeed == 2f);
+    }
+
+    public void TogglePause()
+    {
+        if(towerPanel.activeSelf) return;
+
+        if(_isGamePaused)
+        {
+            pausePanel.SetActive(false);
+            _isGamePaused = false;
+            GameManager.Instance.SetTimeScale(GameManager.Instance.GameSpeed);
+        } else
+        {
+            pausePanel.SetActive(true);   
+            _isGamePaused = true;
+            GameManager.Instance.SetTimeScale(0f);
+        }
+    }
+
+    public void RestartLevel()
+    {
+        GameManager.Instance.SetTimeScale(1f);
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        SceneManager.LoadScene(currentScene.buildIndex);
+    }
+
+     public void QuitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else 
+            Application.Quit();
+        #endif
     }
 }

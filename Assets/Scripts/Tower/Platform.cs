@@ -11,7 +11,7 @@ public class Platform : MonoBehaviour
 
     void Update()
     {
-        if(towerPanelOpened)
+        if(towerPanelOpened || Time.timeScale == 0f)
         {
             return;
         }
