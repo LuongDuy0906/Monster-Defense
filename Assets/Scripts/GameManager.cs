@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private int _lives = 20;
     private int _resources = 175;
     public int Resources => _resources;
+    private float _gameSpeed = 1f;
+    public float GameSpeed => _gameSpeed;
 
     void Awake()
     {
@@ -70,5 +72,11 @@ public class GameManager : MonoBehaviour
             _resources -= amount;
             OnResourcesChanged?.Invoke(_resources);
         }
+    }
+
+    public void SetGameSpeed(float newSpeed)
+    {
+        _gameSpeed = newSpeed;
+        SetTimeScale(_gameSpeed);
     }
 }
