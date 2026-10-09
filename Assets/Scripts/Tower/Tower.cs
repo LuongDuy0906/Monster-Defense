@@ -70,6 +70,8 @@ public class Tower : MonoBehaviour
 
     private void Shoot()
     {
+        _enemiesInRange.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
+
         if(_enemiesInRange.Count > 0)
         {
             GameObject projectile = _projectilePool.GetPooledObject();

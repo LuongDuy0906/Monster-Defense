@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-   private TowerData _data;
-   private Vector2 _shootDirection;
-   private float _projectileDuration;
+    private TowerData _data;
+    private Vector2 _shootDirection;
+    private float _projectileDuration;
+
+    void Start()
+    {
+        transform.localScale = Vector3.one * _data.projectileSize;
+    }
 
     void Update()
     {

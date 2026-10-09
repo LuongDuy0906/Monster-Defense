@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 573b821537e5255449232729bfa6d716, type: 3}
-  m_Name: Wave-3
-  m_EditorClassIdentifier: Assembly-CSharp::WaveData
-  enemyType: 2
-  spawnInterval: 1
-  enemiesPerWave: 15
+  m_Script: {fileID: 11500000, guid: acc01791d9fa52c41bb027410e460fa0, type: 3}
+  m_Name: StrongTower
+  m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  range: 3
+  shootInterval: 1
+  projectileSpeed: 4
+  projectileDuration: 3
+  projectileSize: 2.2
+  damage: 10

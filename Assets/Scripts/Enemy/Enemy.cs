@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private Vector3 _healthBarOriginalScale;
     private float _maxLives;
     public EnemyData Data => data;
+    private bool _hasBeenCounted = false;
 
     void Awake()
     {
@@ -31,6 +32,11 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if(_hasBeenCounted)
+        {
+            return;
+        }
+
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, data.speed * Time.deltaTime);
         
         float relativeDistance = (transform.position - _targetPosition).magnitude;
@@ -44,6 +50,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
+                _hasBeenCounted = true;
                 OnEnemyReachedEnd?.Invoke(data);
                 gameObject.SetActive(false);
             }
@@ -52,12 +59,15 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if(_hasBeenCounted) return;
+
         _lives -= damage;
         _lives = Mathf.Max(0, _lives);
         UpdateHealthBar();
 
         if(_lives == 0)
         {
+            _hasBeenCounted = true;
             OnEnemyDestroyed?.Invoke(this);
             gameObject.SetActive(false);
         }
@@ -73,6 +83,7 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(float healthMultiplier) 
     {
+        _hasBeenCounted = false;
         _maxLives = data.lives * healthMultiplier;
         _lives = _maxLives;
         UpdateHealthBar();

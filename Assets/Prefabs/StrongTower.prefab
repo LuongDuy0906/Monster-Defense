@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4463742270695374547}
   - component: {fileID: 8817510025266803636}
   m_Layer: 0
-  m_Name: FastTower
+  m_Name: StrongTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7538528287983206177, guid: 78c0f62df4cba6844a35a8b8de8bfd7d, type: 3}
+  m_Sprite: {fileID: -6934368480270860225, guid: 78c0f62df4cba6844a35a8b8de8bfd7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6607ba5c709b344c947d073156373dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
-  data: {fileID: 11400000, guid: 65e2c8214249ae54f8bf5d01aa596aed, type: 2}
+  data: {fileID: 11400000, guid: 4e9b9e9ad5a8b0941b08654f23ac469a, type: 2}
 --- !u!58 &4463742270695374547
 CircleCollider2D:
   m_ObjectHideFlags: 0
