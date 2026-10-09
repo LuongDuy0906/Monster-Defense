@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public static event Action<int> OnResourcesChanged;
 
     private int _lives = 20;
-    private int _resources = 0;
+    private int _resources = 175;
+    public int Resources => _resources;
 
     void Awake()
     {
@@ -60,5 +61,14 @@ public class GameManager : MonoBehaviour
     public void SetTimeScale(float scale)
     {
         Time.timeScale = scale;
+    }
+
+    public void SpendResource(int amount)
+    {
+        if(_resources >= amount)
+        {
+            _resources -= amount;
+            OnResourcesChanged?.Invoke(_resources);
+        }
     }
 }

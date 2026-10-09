@@ -5,11 +5,17 @@ using UnityEngine.InputSystem;
 public class Platform : MonoBehaviour
 {
     public static event Action<Platform> OnPlatformClicked;
+    public static bool towerPanelOpened { get; set; } = false;
 
     [SerializeField] private LayerMask platformLayerMask;
 
     void Update()
     {
+        if(towerPanelOpened)
+        {
+            return;
+        }
+
         if(Mouse.current.leftButton.wasPressedThisFrame)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
