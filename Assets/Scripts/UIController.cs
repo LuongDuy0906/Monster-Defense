@@ -190,6 +190,12 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene(currentScene.buildIndex);
     }
 
+    public void GoToMenu()
+    {
+        GameManager.Instance.SetTimeScale(1f);
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
      public void QuitGame()
     {
         #if UNITY_EDITOR
