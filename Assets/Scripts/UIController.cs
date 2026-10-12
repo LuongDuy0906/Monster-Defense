@@ -25,6 +25,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Color normalTextColor = Color.black;
     [SerializeField] private Color selectedTextColor = Color.white;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject gameOverPanel;
 
 
     private List<GameObject> activeCards = new List<GameObject>();
@@ -72,6 +73,11 @@ public class UIController : MonoBehaviour
     private void UpdateLivesText(int currentLives)
     {
         livesText.text = $"Lives: {currentLives}";
+
+        if(currentLives == 0)
+        {
+            ShowGameOver();
+        }
     }
 
     private void UpdateResourcesText(int currentResources)
@@ -203,5 +209,11 @@ public class UIController : MonoBehaviour
         #else 
             Application.Quit();
         #endif
+    }
+
+    private void ShowGameOver()
+    {
+        GameManager.Instance.SetTimeScale(0f);
+        gameOverPanel.SetActive(true);
     }
 }
