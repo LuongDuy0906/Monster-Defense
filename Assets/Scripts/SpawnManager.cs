@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    public static SpawnManager Instance { get; private set; }
+
     public static event Action<int> OnWaveChanged;
+    public static event Action OnMissionCompleted;
 
     [SerializeField] private ObjectPooler orcPool;
     [SerializeField] private ObjectPooler dragonPool;
@@ -21,9 +24,18 @@ public class SpawnManager : MonoBehaviour
     private float _timeBetweenWaves = 1f;
     private float _waveCooldown;
     private bool _isBetweenWaves = false;
+    private bool _isEndlessMode = false;
 
     void Awake()
     {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        } else
+        {
+            Instance = this;
+        }
+
         _poolDictionary = new Dictionary<EnemyType, ObjectPooler>()
         {
             { EnemyType.Orc, orcPool },
@@ -56,6 +68,12 @@ public class SpawnManager : MonoBehaviour
             _waveCooldown -= Time.deltaTime;
             if(_waveCooldown <= 0f)
             {
+                if(_waveCounter + 1 > LevelManager.Instance.CurrentLevel.wavesToWin && !_isEndlessMode)
+                {
+                    OnMissionCompleted?.Invoke();
+                    return;
+                }
+
                 _currentWaveIndex = (_currentWaveIndex + 1) % waves.Length ;
                 _waveCounter++;
                 OnWaveChanged?.Invoke(_waveCounter);
@@ -107,5 +125,10 @@ public class SpawnManager : MonoBehaviour
     private void HandleEnemyDestroyed(Enemy enemy)
     {
         _enemiesRemoved++;
+    }
+
+    public void EnableEnlessMode()
+    {
+        _isEndlessMode = true;
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject towerCardPrefab;
     [SerializeField] private Transform cardsContainer;
     [SerializeField] private TowerData[] towers;
-    [SerializeField] private GameObject noResourcesText;
+    [SerializeField] private TMP_Text warningText;
     [SerializeField] private Button speed1Button;
     [SerializeField] private Button speed2Button;
     [SerializeField] private Button speed3Button;
@@ -26,6 +27,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private Color selectedTextColor = Color.white;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TMP_Text objectiveText;
+    [SerializeField] private GameObject missionCompletePanel;
 
 
     private List<GameObject> activeCards = new List<GameObject>();
@@ -39,6 +42,8 @@ public class UIController : MonoBehaviour
         GameManager.OnResourcesChanged += UpdateResourcesText;
         Platform.OnPlatformClicked += HandlePlatformClicked;
         TowerCard.OnTowerSelected += HandleTowerSelected;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SpawnManager.OnMissionCompleted += ShowMissionComplete;
     }
 
     void OnDisable()
@@ -48,6 +53,8 @@ public class UIController : MonoBehaviour
         GameManager.OnResourcesChanged -= UpdateResourcesText;
         Platform.OnPlatformClicked -= HandlePlatformClicked;
         TowerCard.OnTowerSelected -= HandleTowerSelected;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SpawnManager.OnMissionCompleted -= ShowMissionComplete;
     }
 
     void Start()
@@ -108,6 +115,13 @@ public class UIController : MonoBehaviour
 
     private void HandleTowerSelected(TowerData data)
     {
+        if(_currentPlatform.transform.childCount > 0)
+        {
+            HideTowerPanel();
+            StartCoroutine(ShowWarningMessage("This platform already has a tower"));
+            return;
+        }
+
         if(GameManager.Instance.Resources >= data.cost)
         {
             GameManager.Instance.SpendResource(data.cost);
@@ -115,16 +129,17 @@ public class UIController : MonoBehaviour
 
         } else
         {
-            StartCoroutine(ShowNoResourcesMessage());
+            StartCoroutine(ShowWarningMessage("Not Enough Resources"));
         }
         HideTowerPanel();
     }
 
-    private IEnumerator ShowNoResourcesMessage()
+    private IEnumerator ShowWarningMessage(string message)
     {
-        noResourcesText.SetActive(true);
+        warningText.text = message; 
+        warningText.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3f);
-        noResourcesText.SetActive(false);
+        warningText.gameObject.SetActive(false);
     }
 
     private void PopulateTowerCard()
@@ -215,5 +230,31 @@ public class UIController : MonoBehaviour
     {
         GameManager.Instance.SetTimeScale(0f);
         gameOverPanel.SetActive(true);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(ShowObjective());
+    }
+
+    private IEnumerator ShowObjective()
+    {
+        objectiveText.text = $"Survice {LevelManager.Instance.CurrentLevel.wavesToWin} waves!";
+        objectiveText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        objectiveText.gameObject.SetActive(false);
+    }
+
+    private void ShowMissionComplete()
+    {
+        missionCompletePanel.SetActive(true);
+        GameManager.Instance.SetTimeScale(0f);
+    }
+
+    public void EnterEndlessMode()
+    {
+        missionCompletePanel.gameObject.SetActive(false);
+        GameManager.Instance.SetTimeScale(GameManager.Instance.GameSpeed);
+        SpawnManager.Instance.EnableEnlessMode();
     }
 }
