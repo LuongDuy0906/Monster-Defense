@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
 
         if(_lives == 0)
         {
+            AudioManager.Instance.PlayEnemyDestroy();
             _hasBeenCounted = true;
             OnEnemyDestroyed?.Invoke(this);
             gameObject.SetActive(false);

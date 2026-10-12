@@ -37,6 +37,7 @@ public class UIController : MonoBehaviour
     private List<GameObject> activeCards = new List<GameObject>();
     private Platform _currentPlatform;
     private bool _isGamePaused = false;
+    private bool _missionCompleteSoundPlayed = false;
 
     void Awake()
     {
@@ -74,9 +75,18 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        speed1Button.onClick.AddListener(() => SetGameSpeed(0.2f));
-        speed2Button.onClick.AddListener(() => SetGameSpeed(1f));
-        speed3Button.onClick.AddListener(() => SetGameSpeed(2f));
+        speed1Button.onClick.AddListener(() => {
+            SetGameSpeed(0.2f);
+            AudioManager.Instance.PlaySpeedSlow();
+        });
+        speed2Button.onClick.AddListener(() => {
+            SetGameSpeed(1f);
+            AudioManager.Instance.PlaySpeedNormal();
+        });
+        speed3Button.onClick.AddListener(() => {
+            SetGameSpeed(2f);
+            AudioManager.Instance.PlaySpeedFast();
+        });
 
         HighlightSelectedSpeedButton(GameManager.Instance.GameSpeed);
     }
@@ -121,6 +131,7 @@ public class UIController : MonoBehaviour
         GameManager.Instance.SetTimeScale(0);
         Platform.towerPanelOpened = true;
         PopulateTowerCard();
+        AudioManager.Instance.PlayPanelToggle();
     }
 
     public void HideTowerPanel()
@@ -141,6 +152,7 @@ public class UIController : MonoBehaviour
 
         if(GameManager.Instance.Resources >= data.cost)
         {
+            AudioManager.Instance.PlayTowerPlaced();
             GameManager.Instance.SpendResource(data.cost);
             _currentPlatform.PlaceTower(data);
 
@@ -154,6 +166,7 @@ public class UIController : MonoBehaviour
     private IEnumerator ShowWarningMessage(string message)
     {
         warningText.text = message; 
+        AudioManager.Instance.PlayWarning();
         warningText.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3f);
         warningText.gameObject.SetActive(false);
@@ -211,11 +224,13 @@ public class UIController : MonoBehaviour
             pausePanel.SetActive(false);
             _isGamePaused = false;
             GameManager.Instance.SetTimeScale(GameManager.Instance.GameSpeed);
+            AudioManager.Instance.PlayPause();
         } else
         {
             pausePanel.SetActive(true);   
             _isGamePaused = true;
             GameManager.Instance.SetTimeScale(0f);
+            AudioManager.Instance.PlayUnPause();
         }
     }
 
@@ -243,6 +258,7 @@ public class UIController : MonoBehaviour
     {
         GameManager.Instance.SetTimeScale(0f);
         gameOverPanel.SetActive(true);
+        AudioManager.Instance.PlayGameOver();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -253,6 +269,7 @@ public class UIController : MonoBehaviour
         canvas.worldCamera = mainCamera;
 
         HidePanel();
+        _missionCompleteSoundPlayed = false;
 
         if(scene.name == "MainMenuScene")
         {
@@ -274,9 +291,14 @@ public class UIController : MonoBehaviour
 
     private void ShowMissionComplete()
     {
-        UpdateNextLevelButton();
-        missionCompletePanel.SetActive(true);
-        GameManager.Instance.SetTimeScale(0f);
+        if(!_missionCompleteSoundPlayed)
+        {
+            UpdateNextLevelButton();
+            missionCompletePanel.SetActive(true);
+            GameManager.Instance.SetTimeScale(0f);
+            AudioManager.Instance.PlayMissionComplete();
+            _missionCompleteSoundPlayed = true;
+        }
     }
 
     public void EnterEndlessMode()
