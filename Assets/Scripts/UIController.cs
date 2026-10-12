@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -10,6 +9,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public static UIController Instance { get; private set; }
+
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text livesText;
     [SerializeField] private TMP_Text resourcesText;
@@ -21,6 +22,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Button speed1Button;
     [SerializeField] private Button speed2Button;
     [SerializeField] private Button speed3Button;
+    [SerializeField] private Button pauseButton;
     [SerializeField] private Color normalButtonColor = Color.white;
     [SerializeField] private Color selectedButtonColor = Color.blue;
     [SerializeField] private Color normalTextColor = Color.black;
@@ -29,11 +31,24 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TMP_Text objectiveText;
     [SerializeField] private GameObject missionCompletePanel;
+    [SerializeField] private Button nextLevelButton;
 
 
     private List<GameObject> activeCards = new List<GameObject>();
     private Platform _currentPlatform;
     private bool _isGamePaused = false;
+
+    void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        } else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     void OnEnable()
     {
@@ -62,6 +77,8 @@ public class UIController : MonoBehaviour
         speed1Button.onClick.AddListener(() => SetGameSpeed(0.2f));
         speed2Button.onClick.AddListener(() => SetGameSpeed(1f));
         speed3Button.onClick.AddListener(() => SetGameSpeed(2f));
+
+        HighlightSelectedSpeedButton(GameManager.Instance.GameSpeed);
     }
 
     void Update()
@@ -81,7 +98,7 @@ public class UIController : MonoBehaviour
     {
         livesText.text = $"Lives: {currentLives}";
 
-        if(currentLives == 0)
+        if(currentLives <= 0)
         {
             ShowGameOver();
         }
@@ -162,7 +179,6 @@ public class UIController : MonoBehaviour
 
     private void SetGameSpeed(float timeScale)
     {
-        if(pausePanel.activeSelf) return;
         HighlightSelectedSpeedButton(timeScale);
         GameManager.Instance.SetGameSpeed(timeScale);
     }
@@ -231,7 +247,21 @@ public class UIController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartCoroutine(ShowObjective());
+        Camera mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        Canvas canvas = GetComponent<Canvas>();
+
+        canvas.worldCamera = mainCamera;
+
+        HidePanel();
+
+        if(scene.name == "MainMenuScene")
+        {
+            HideUI();
+        } else
+        {
+            ShowUI();
+            StartCoroutine(ShowObjective());
+        }
     }
 
     private IEnumerator ShowObjective()
@@ -244,6 +274,7 @@ public class UIController : MonoBehaviour
 
     private void ShowMissionComplete()
     {
+        UpdateNextLevelButton();
         missionCompletePanel.SetActive(true);
         GameManager.Instance.SetTimeScale(0f);
     }
@@ -252,6 +283,62 @@ public class UIController : MonoBehaviour
     {
         missionCompletePanel.gameObject.SetActive(false);
         GameManager.Instance.SetTimeScale(GameManager.Instance.GameSpeed);
-        SpawnManager.Instance.EnableEnlessMode();
+        SpawnManager.Instance.EnableEndlessMode();
+    }
+
+    private void HideUI()
+    {
+        HidePanel();
+
+        waveText.gameObject.SetActive(false);
+        livesText.gameObject.SetActive(false);
+        resourcesText.gameObject.SetActive(false);
+        warningText.gameObject.SetActive(false);
+
+        speed1Button.gameObject.SetActive(false);
+        speed2Button.gameObject.SetActive(false);
+        speed3Button.gameObject.SetActive(false);
+        pauseButton.gameObject.SetActive(false);
+    }
+
+    private void ShowUI()
+    {
+        waveText.gameObject.SetActive(true);
+        livesText.gameObject.SetActive(true);
+        resourcesText.gameObject.SetActive(true);
+
+        speed1Button.gameObject.SetActive(true);
+        speed2Button.gameObject.SetActive(true);
+        speed3Button.gameObject.SetActive(true);
+        HighlightSelectedSpeedButton(GameManager.Instance.GameSpeed);
+        Debug.Log(GameManager.Instance.GameSpeed);
+        pauseButton.gameObject.SetActive(true);
+    }
+
+    private void HidePanel()
+    {
+        gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        missionCompletePanel.SetActive(false);
+    }
+
+    public void LoadNextLevel()
+    {
+        var levelManager = LevelManager.Instance;
+        int currentIndex = Array.IndexOf(levelManager.allLevels, levelManager.CurrentLevel);
+        int nextIndex = currentIndex + 1;
+        if(nextIndex < levelManager.allLevels.Length)
+        {
+            missionCompletePanel.SetActive(false);
+            levelManager.LoadLevel(levelManager.allLevels[nextIndex]);
+        }
+    }
+
+    private void UpdateNextLevelButton()
+    {
+        var levelManager = LevelManager.Instance;
+        int currentIndex = Array.IndexOf(levelManager.allLevels, levelManager.CurrentLevel);
+        nextLevelButton.interactable = currentIndex + 1 < levelManager.allLevels.Length;
+
     }
 }

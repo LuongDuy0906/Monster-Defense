@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
             _waveCooldown -= Time.deltaTime;
             if(_waveCooldown <= 0f)
             {
-                if(_waveCounter + 1 > LevelManager.Instance.CurrentLevel.wavesToWin && !_isEndlessMode)
+                if(_waveCounter + 1 >= LevelManager.Instance.CurrentLevel.wavesToWin && !_isEndlessMode)
                 {
                     OnMissionCompleted?.Invoke();
                     return;
@@ -127,7 +127,7 @@ public class SpawnManager : MonoBehaviour
         _enemiesRemoved++;
     }
 
-    public void EnableEnlessMode()
+    public void EnableEndlessMode()
     {
         _isEndlessMode = true;
     }
