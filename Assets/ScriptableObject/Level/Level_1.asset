@@ -16,4 +16,4 @@ MonoBehaviour:
   wavesToWin: 3
   startResources: 180
   startingLives: 5
-  backgroundMusic: {fileID: 0}
+  initialSpawnPosition: {x: -7, y: 6}
