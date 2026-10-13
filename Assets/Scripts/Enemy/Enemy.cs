@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public EnemyData Data => data;
     private bool _hasBeenCounted = false;
     private float speed;
+    private Vector3 _offset;
 
     void Awake()
     {
@@ -28,7 +29,7 @@ public class Enemy : MonoBehaviour
     void OnEnable()
     {
         _currentWaypoint = 0;
-        _targetPosition = _currentPath.GetPosition(_currentWaypoint);
+        _targetPosition = _currentPath.GetPosition(_currentWaypoint) + _offset;
     }
 
     void Update()
@@ -47,7 +48,7 @@ public class Enemy : MonoBehaviour
             if(_currentWaypoint < _currentPath.Waypoints.Length - 1)
             {
                 _currentWaypoint++;
-                _targetPosition = _currentPath.GetPosition(_currentWaypoint);
+                _targetPosition = _currentPath.GetPosition(_currentWaypoint) + _offset;
             }
             else
             {
@@ -90,5 +91,10 @@ public class Enemy : MonoBehaviour
         _lives = _maxLives;
         UpdateHealthBar();
         speed = UnityEngine.Random.Range(data.minSpeed, data.maxSpeed);
+
+        float offsetX = UnityEngine.Random.Range(-0.5f, 0.5f);
+        float offsetY = UnityEngine.Random.Range(-0.5f, 0.5f);
+
+        _offset = new Vector3(offsetX, offsetY);
     }
 }
