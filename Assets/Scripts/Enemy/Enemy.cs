@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     private float _maxLives;
     public EnemyData Data => data;
     private bool _hasBeenCounted = false;
+    private float speed;
 
     void Awake()
     {
@@ -37,7 +38,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, data.speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
         
         float relativeDistance = (transform.position - _targetPosition).magnitude;
 
@@ -88,5 +89,6 @@ public class Enemy : MonoBehaviour
         _maxLives = data.lives * healthMultiplier;
         _lives = _maxLives;
         UpdateHealthBar();
+        speed = UnityEngine.Random.Range(data.minSpeed, data.maxSpeed);
     }
 }

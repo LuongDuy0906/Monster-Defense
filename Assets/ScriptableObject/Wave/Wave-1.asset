@@ -15,3 +15,4 @@ MonoBehaviour:
   enemyType: 0
   spawnInterval: 0.8
   enemiesPerWave: 15
+  waveSpawnClip: {fileID: 8300000, guid: 6133f4973fa87344289adaaf23c5e3c4, type: 3}

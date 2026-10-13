@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level_1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelName: Level 1
-  wavesToWin: 1
+  wavesToWin: 3
   startResources: 180
   startingLives: 5
   backgroundMusic: {fileID: 0}

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   lives: 2
   damage: 1
-  speed: 4
+  minSpeed: 1.5
+  maxSpeed: 2
   resourceReward: 2

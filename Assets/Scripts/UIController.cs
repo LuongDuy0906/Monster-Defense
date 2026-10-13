@@ -32,6 +32,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text objectiveText;
     [SerializeField] private GameObject missionCompletePanel;
     [SerializeField] private Button nextLevelButton;
+    [SerializeField] private ParticleSystem missionCompleteParticles;
 
 
     private List<GameObject> activeCards = new List<GameObject>();
@@ -298,6 +299,7 @@ public class UIController : MonoBehaviour
             GameManager.Instance.SetTimeScale(0f);
             AudioManager.Instance.PlayMissionComplete();
             _missionCompleteSoundPlayed = true;
+            missionCompleteParticles.Play();
         }
     }
 
@@ -333,7 +335,6 @@ public class UIController : MonoBehaviour
         speed2Button.gameObject.SetActive(true);
         speed3Button.gameObject.SetActive(true);
         HighlightSelectedSpeedButton(GameManager.Instance.GameSpeed);
-        Debug.Log(GameManager.Instance.GameSpeed);
         pauseButton.gameObject.SetActive(true);
     }
 
@@ -351,7 +352,6 @@ public class UIController : MonoBehaviour
         int nextIndex = currentIndex + 1;
         if(nextIndex < levelManager.allLevels.Length)
         {
-            missionCompletePanel.SetActive(false);
             levelManager.LoadLevel(levelManager.allLevels[nextIndex]);
         }
     }

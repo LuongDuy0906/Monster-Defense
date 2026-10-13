@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioSource musicSource;
 
+    public AudioClip mainMenuMusic;
+    public AudioClip gamePlayMusic;
     public AudioClip buttonHoverClip;
     public AudioClip buttonClickClip;
     public AudioClip towerPlaceClip;
@@ -30,6 +32,7 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            musicSource.volume = 0.4f;
         }
     }
 
@@ -51,4 +54,13 @@ public class AudioManager : MonoBehaviour
     public void PlaySpeedFast() => PlaySound(speedFastClip);
     public void PlayPanelToggle() => PlaySound(panelToggleClip);
     public void PlayWarning() => PlaySound(warningClip);
+
+    public void PlayMusic(AudioClip clip)
+    {
+        if (musicSource.clip == clip && musicSource.isPlaying) return;
+
+        musicSource.clip = clip;
+        musicSource.loop = true;
+        musicSource.Play();
+    }
 }

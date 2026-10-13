@@ -59,6 +59,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         OnWaveChanged?.Invoke(_waveCounter);
+        AudioManager.Instance.PlaySound(CurrentWave.waveSpawnClip);
     }
 
     void Update()
@@ -68,15 +69,10 @@ public class SpawnManager : MonoBehaviour
             _waveCooldown -= Time.deltaTime;
             if(_waveCooldown <= 0f)
             {
-                if(_waveCounter + 1 >= LevelManager.Instance.CurrentLevel.wavesToWin && !_isEndlessMode)
-                {
-                    OnMissionCompleted?.Invoke();
-                    return;
-                }
-
                 _currentWaveIndex = (_currentWaveIndex + 1) % waves.Length ;
                 _waveCounter++;
                 OnWaveChanged?.Invoke(_waveCounter);
+                AudioManager.Instance.PlaySound(CurrentWave.waveSpawnClip);
                 _spawnCounter = 0;
                 _enemiesRemoved = 0;
                 _spawnTimer = 0f;
@@ -93,9 +89,15 @@ public class SpawnManager : MonoBehaviour
                 _spawnCounter++;
             } else if(_spawnCounter >= CurrentWave.enemiesPerWave && _enemiesRemoved >= CurrentWave.enemiesPerWave)
             {
-                
-                _isBetweenWaves = true;
-                _waveCooldown = _timeBetweenWaves;
+                if(_waveCounter + 1 >= LevelManager.Instance.CurrentLevel.wavesToWin && !_isEndlessMode)
+                {
+                    OnMissionCompleted?.Invoke();
+                    return;
+                } else
+                {
+                    _isBetweenWaves = true;
+                    _waveCooldown = _timeBetweenWaves;
+                }
             }
         }
 
