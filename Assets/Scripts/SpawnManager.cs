@@ -89,10 +89,9 @@ public class SpawnManager : MonoBehaviour
                 _spawnCounter++;
             } else if(_spawnCounter >= CurrentWave.enemiesPerWave && _enemiesRemoved >= CurrentWave.enemiesPerWave)
             {
-                if(_waveCounter + 1 >= LevelManager.Instance.CurrentLevel.wavesToWin && !_isEndlessMode)
+                if(_waveCounter + 1 >= LevelManager.Instance.CurrentLevel.wavesToWin && !_isEndlessMode && GameManager.Instance.Lives > 0)
                 {
                     OnMissionCompleted?.Invoke();
-                    return;
                 } else
                 {
                     _isBetweenWaves = true;

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int Resources => _resources;
     private float _gameSpeed = 1f;
     public float GameSpeed => _gameSpeed;
+    public int Lives => _lives;
 
     void Awake()
     {
@@ -100,9 +101,7 @@ public class GameManager : MonoBehaviour
         if(scene.name == "MainMenuScene")
         {
             AudioManager.Instance.PlayMusic(AudioManager.Instance.mainMenuMusic);
-        }
-
-        if(LevelManager.Instance != null && LevelManager.Instance.CurrentLevel != null)
+        } else if(LevelManager.Instance != null && LevelManager.Instance.CurrentLevel != null)
         {
             ResetGameState();
             AudioManager.Instance.PlayMusic(AudioManager.Instance.gamePlayMusic);

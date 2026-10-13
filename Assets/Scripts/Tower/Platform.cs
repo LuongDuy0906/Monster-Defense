@@ -16,9 +16,30 @@ public class Platform : MonoBehaviour
             return;
         }
 
-        if(Mouse.current.leftButton.wasPressedThisFrame)
+        bool mousePressed = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
+        bool touchPressed = false;
+
+        Vector2 screenPos = Vector2.zero;
+
+        if(mousePressed)
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            screenPos = Mouse.current.position.ReadValue();
+        } else if (Touchscreen.current != null) 
+        {
+            foreach(var touch in Touchscreen.current.touches)
+            {
+                if(touch.press.wasPressedThisFrame)
+                {
+                    touchPressed = true;
+                    screenPos = touch.position.ReadValue();
+                    break;
+                }
+            }
+        }
+
+        if(mousePressed || touchPressed)
+        {
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(screenPos);
             RaycastHit2D raycastHit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity, platformLayerMask);
 
             if(raycastHit.collider != null)

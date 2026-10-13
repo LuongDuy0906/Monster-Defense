@@ -270,6 +270,7 @@ public class UIController : MonoBehaviour
         canvas.worldCamera = mainCamera;
 
         HidePanel();
+        _isGamePaused = false;
         _missionCompleteSoundPlayed = false;
 
         if(scene.name == "MainMenuScene")
