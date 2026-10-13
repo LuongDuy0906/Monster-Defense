@@ -1594,7 +1594,7 @@ MonoBehaviour:
   sfxSource: {fileID: 549609480}
   musicSource: {fileID: 549609479}
   mainMenuMusic: {fileID: 8300000, guid: 7f7ca401e7ad955409a313ddcd8fe619, type: 3}
-  gamePlayMusic: {fileID: 8300000, guid: 4f68255ab3d57c64fb19f46848088e81, type: 3}
+  gamePlayMusic: {fileID: 8300000, guid: 6dc72420532040744a0cbdc8e2be38e2, type: 3}
   buttonHoverClip: {fileID: 8300000, guid: 47301950808ba2743aeb379e4f5dab34, type: 3}
   buttonClickClip: {fileID: 8300000, guid: a3c367dcbfc1fb94cac9813b29d71ac7, type: 3}
   towerPlaceClip: {fileID: 8300000, guid: 03b02f113e0a38a46a10aaf828229d0f, type: 3}
