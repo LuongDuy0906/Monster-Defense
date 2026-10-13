@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Level_1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelName: Level 1
-  wavesToWin: 3
+  wavesToWin: 2
   startResources: 180
   startingLives: 5
   initialSpawnPosition: {x: -7, y: 6}
+  waves:
+  - {fileID: 11400000, guid: 004471cd79b760c499581a931cc5b369, type: 2}
+  - {fileID: 11400000, guid: 004471cd79b760c499581a931cc5b369, type: 2}

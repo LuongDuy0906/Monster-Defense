@@ -13,13 +13,13 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private ObjectPooler orcPool;
     [SerializeField] private ObjectPooler dragonPool;
     [SerializeField] private ObjectPooler kaijuPool;
-    [SerializeField] private WaveData[] waves; 
+    private WaveData[] _waves => LevelManager.Instance.CurrentLevel.waves; 
 
     private float _spawnTimer;
     private Dictionary<EnemyType, ObjectPooler> _poolDictionary;
     private int _currentWaveIndex = 0;
     private int _waveCounter;
-    private WaveData CurrentWave => waves[_currentWaveIndex];
+    private WaveData CurrentWave => _waves[_currentWaveIndex];
     private float _spawnCounter;
     private int _enemiesRemoved;
     private float _timeBetweenWaves = 1f;
@@ -76,7 +76,7 @@ public class SpawnManager : MonoBehaviour
             _waveCooldown -= Time.deltaTime;
             if(_waveCooldown <= 0f)
             {
-                _currentWaveIndex = (_currentWaveIndex + 1) % waves.Length ;
+                _currentWaveIndex = (_currentWaveIndex + 1) % _waves.Length ;
                 _waveCounter++;
                 OnWaveChanged?.Invoke(_waveCounter);
                 AudioManager.Instance.PlaySound(CurrentWave.waveSpawnClip);
@@ -148,16 +148,23 @@ public class SpawnManager : MonoBehaviour
         if(!_isGamePlayScene) return;
         _currentPath = GameObject.Find("Path-1").GetComponent<Path>();
         AudioManager.Instance.PlaySound(CurrentWave.waveSpawnClip);
+
+        if(LevelManager.Instance.CurrentLevel != null)
+        {
+            transform.position = LevelManager.Instance.CurrentLevel.initialSpawnPosition;
+        }
     }
 
     private void ResetWaveState()
     {
         _currentWaveIndex = 0;
         _waveCounter = 0;
+        OnWaveChanged?.Invoke(_waveCounter);
         _spawnCounter = 0;
         _enemiesRemoved = 0;
         _spawnTimer = 0f;
         _isBetweenWaves = false;
+        _isEndlessMode = false;
 
         foreach(var pool in _poolDictionary.Values)
         {

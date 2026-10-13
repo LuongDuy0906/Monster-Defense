@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 573b821537e5255449232729bfa6d716, type: 3}
-  m_Name: Wave-3
+  m_Name: DragonWave
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
-  enemyType: 2
-  spawnInterval: 1
-  enemiesPerWave: 15
-  waveSpawnClip: {fileID: 8300000, guid: eff9683cfcef27f418eedf5782c81cce, type: 3}
+  enemyType: 1
+  spawnInterval: 0.5
+  enemiesPerWave: 20
+  waveSpawnClip: {fileID: 8300000, guid: 0f95f14e70d18634e886a9aa043f95b1, type: 3}

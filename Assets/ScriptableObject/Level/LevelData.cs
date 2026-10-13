@@ -8,4 +8,5 @@ public class LevelData : ScriptableObject
     public int startResources;
     public int startingLives;
     public Vector2 initialSpawnPosition;
+    public WaveData[] waves;
 }
