@@ -1,10 +1,13 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance {get; private set;}
+
+    [SerializeField] private TMP_FontAsset globalFont;
 
     public static event Action<int> OnLivesChanged;
     public static event Action<int> OnResourcesChanged;
@@ -25,6 +28,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            ApplyGlobalFont();
         }
     }
 
@@ -105,6 +110,14 @@ public class GameManager : MonoBehaviour
         {
             ResetGameState();
             AudioManager.Instance.PlayMusic(AudioManager.Instance.gamePlayMusic);
+        }
+    }
+
+    private void ApplyGlobalFont()
+    {
+        foreach(var tmp in FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            tmp.font = globalFont;
         }
     }
 }

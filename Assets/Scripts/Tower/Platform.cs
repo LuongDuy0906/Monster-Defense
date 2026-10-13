@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Platform : MonoBehaviour
@@ -11,7 +12,7 @@ public class Platform : MonoBehaviour
 
     void Update()
     {
-        if(towerPanelOpened || Time.timeScale == 0f)
+        if(towerPanelOpened || Time.timeScale == 0f || EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
