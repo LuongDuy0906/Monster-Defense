@@ -18,5 +18,4 @@ MonoBehaviour:
   startingLives: 5
   initialSpawnPosition: {x: -7, y: 6}
   waves:
-  - {fileID: 11400000, guid: 004471cd79b760c499581a931cc5b369, type: 2}
-  - {fileID: 11400000, guid: 004471cd79b760c499581a931cc5b369, type: 2}
+  - {fileID: 11400000, guid: e140f149189821b43a2e365ca9072b52, type: 2}

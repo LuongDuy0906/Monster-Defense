@@ -350,10 +350,7 @@ MonoBehaviour:
   orcPool: {fileID: 1921830663}
   dragonPool: {fileID: 1296250997}
   kaijuPool: {fileID: 1220299366}
-  waves:
-  - {fileID: 11400000, guid: 004471cd79b760c499581a931cc5b369, type: 2}
-  - {fileID: 11400000, guid: 97d9f80301e6f964a9d84193439baf40, type: 2}
-  - {fileID: 11400000, guid: ba75d1354c945d547a7a9b51b6771f49, type: 2}
+  orgePool: {fileID: 1084258235}
 --- !u!4 &192345524
 Transform:
   m_ObjectHideFlags: 0
@@ -368,6 +365,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1921830664}
+  - {fileID: 1084258234}
   - {fileID: 1296250998}
   - {fileID: 1220299367}
   m_Father: {fileID: 0}
@@ -7970,6 +7968,52 @@ RectTransform:
   m_AnchoredPosition: {x: -50, y: -50}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 1, y: 1}
+--- !u!1 &1084258233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084258234}
+  - component: {fileID: 1084258235}
+  m_Layer: 0
+  m_Name: OrgePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1084258234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084258233}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.35, y: -3.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 192345524}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1084258235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084258233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d873902397cf34f42a0a98f3879f001e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
+  prefab: {fileID: 4641120952075735658, guid: 064b110c31951f043b80840e1d0c9bda, type: 3}
+  poolSize: 5
 --- !u!1001 &1115550881
 PrefabInstance:
   m_ObjectHideFlags: 0

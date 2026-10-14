@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     private float _speed;
     private Vector3 _offset;
 
+    public Vector3 TargetPosition => _targetPosition;
+
     void Awake()
     {
         _healthBarOriginalScale = healthBar.localScale;
