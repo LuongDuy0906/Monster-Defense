@@ -14,6 +14,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private ObjectPooler dragonPool;
     [SerializeField] private ObjectPooler kaijuPool;
     [SerializeField] private ObjectPooler orgePool;
+    [SerializeField] private ObjectPooler redDragonPool;
+    [SerializeField] private ObjectPooler minotaurPool;
     private WaveData[] _waves => LevelManager.Instance.CurrentLevel.waves; 
 
     private float _spawnTimer;
@@ -46,7 +48,9 @@ public class SpawnManager : MonoBehaviour
             { EnemyType.Orc, orcPool },
             { EnemyType.Dragon, dragonPool },
             { EnemyType.Kaiju, kaijuPool },
-            { EnemyType.Orge, orgePool}
+            { EnemyType.Orge, orgePool },
+            { EnemyType.RedDragon, redDragonPool },
+            { EnemyType.Minotaur, minotaurPool }
         };
     }
 

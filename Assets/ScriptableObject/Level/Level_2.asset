@@ -18,7 +18,7 @@ MonoBehaviour:
   startingLives: 3
   initialSpawnPosition: {x: -12, y: 2}
   waves:
-  - {fileID: 11400000, guid: 97d9f80301e6f964a9d84193439baf40, type: 2}
-  - {fileID: 11400000, guid: ba75d1354c945d547a7a9b51b6771f49, type: 2}
-  - {fileID: 11400000, guid: 004471cd79b760c499581a931cc5b369, type: 2}
-  - {fileID: 11400000, guid: 97d9f80301e6f964a9d84193439baf40, type: 2}
+  - {fileID: 11400000, guid: e140f149189821b43a2e365ca9072b52, type: 2}
+  - {fileID: 11400000, guid: b5322432b91b7b04091d1f2194451b2a, type: 2}
+  - {fileID: 11400000, guid: e140f149189821b43a2e365ca9072b52, type: 2}
+  - {fileID: 11400000, guid: c35e0924aebdaef45bfcd0644bb8d638, type: 2}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RedDragon_Override
+  m_Controller: {fileID: 9100000, guid: 41a2ab6fa93294a40b578a3bf340db41, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: c853a6ba762884943bac2c1382cb4c91, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 581cfcb17fec75943ae3c0b2829f093b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 874e08fce9b4caf4fa2af5362cdec074, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8d1f2ffe0ec83f84eb14c111192fce9f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 74283e661b94b714e9d0da5c97894f88, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 089aaee2bc3e9ad499818a58ddc3996a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 001d74f179f169e4991f18a93405dfa1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: af092dbce07f0b54ea4a41dbaa091d0a, type: 2}

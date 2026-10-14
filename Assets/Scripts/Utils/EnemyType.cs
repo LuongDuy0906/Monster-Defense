@@ -5,5 +5,7 @@ public enum EnemyType
     Orc,
     Dragon,
     Kaiju,
-    Orge
+    Orge,
+    RedDragon,
+    Minotaur
 }
