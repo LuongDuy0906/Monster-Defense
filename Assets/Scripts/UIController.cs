@@ -94,7 +94,7 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && SceneManager.GetActiveScene().name != "MainMenuScene")
         {
             TogglePause();
         }
