@@ -430,7 +430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9719.223
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -744,7 +744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1792,7 +1792,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 494269649
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_RenderMode: 0
@@ -6647,9 +6647,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2436, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -6898,7 +6898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8119,7 +8119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9333,7 +9333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9679,7 +9679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10230,7 +10230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10499,9 +10499,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2436, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -10616,7 +10616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10812,7 +10812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10948,7 +10948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11203,7 +11203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11423,7 +11423,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973072075}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
@@ -11556,7 +11556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196689551189858083, guid: bd97e97d15d1d1446a88da091cd91e85, type: 3}
       propertyPath: m_LocalRotation.w
