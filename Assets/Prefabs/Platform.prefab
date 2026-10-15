@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -316181007
-  m_SortingLayer: 2
+  m_SortingLayerID: 922334637
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7891793613738847529, guid: 08451f85348c4cd42a695d194b0b9fa2, type: 3}
@@ -154,3 +154,4 @@ MonoBehaviour:
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  towerPlaceholderSprite: {fileID: -3964856179284347504, guid: 08451f85348c4cd42a695d194b0b9fa2, type: 3}

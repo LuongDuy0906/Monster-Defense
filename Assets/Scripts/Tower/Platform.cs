@@ -9,12 +9,37 @@ public class Platform : MonoBehaviour
     public static bool towerPanelOpened { get; set; } = false;
 
     [SerializeField] private LayerMask platformLayerMask;
+    [SerializeField] private Sprite towerPlaceholderSprite;
+
+    private SpriteRenderer _spriteRender;
+    private Sprite _originalSprite;
+
+
+    void Awake()
+    {
+        _spriteRender = GetComponent<SpriteRenderer>();    
+        _originalSprite = _spriteRender.sprite;   
+    }
 
     void Update()
     {
         if(towerPanelOpened || Time.timeScale == 0f || EventSystem.current.IsPointerOverGameObject())
         {
             return;
+        }
+
+        if(transform.childCount == 0)
+        {
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, Mathf.Infinity, platformLayerMask);
+
+            if(hit.collider != null && hit.collider.gameObject == gameObject)
+            {
+                _spriteRender.sprite = towerPlaceholderSprite;
+            } else
+            {
+                _spriteRender.sprite = _originalSprite;
+            }
         }
 
         bool mousePressed = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
@@ -57,5 +82,6 @@ public class Platform : MonoBehaviour
     public void PlaceTower(TowerData data)
     {
         Instantiate(data.prefab, transform.position, Quaternion.identity, transform);
+        _spriteRender.sprite = null;
     }
 }
